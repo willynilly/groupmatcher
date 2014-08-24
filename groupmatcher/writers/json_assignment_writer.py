@@ -19,4 +19,4 @@ class JsonAssignmentWriter:
         
         j['stats'] = AssignmentStats().compute(model_manager)
         
-        return json.dumps(j, sort_keys=True, separators=(',',':'))
+        return json.dumps(j, sort_keys=True, separators=(',',':'), indent=4)

@@ -18,4 +18,4 @@ class JsonPreferenceWriter:
                 prefs[str(group_id)] = ind.get_group_pref_value(group_id)
             ind_j = {'prefs': prefs}
             j['individuals'][str(ind_id)] = ind_j 
-        return json.dumps(j, sort_keys=True, separators=(',',':'))
+        return json.dumps(j, sort_keys=True, separators=(',',':'), indent=4)
