@@ -1,0 +1,24 @@
+{
+  "groups": {
+    "group1": {"max":2},
+    "group2": {"max":4},
+    "group3": {"max":1}
+  },
+  "individuals": {
+    "bob": {"prefs":{
+      "group1":10,
+      "group2":2.2,
+      "group3":0
+    }},
+    "sam": {"prefs":{
+      "group1":4,
+      "group2":2.2,
+      "group3":-6
+    }}, 
+    "lisa": {"prefs":{
+      "group1":4,
+      "group2":0,
+      "group3":4
+    }}
+  }
+}

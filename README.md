@@ -1,22 +1,54 @@
 groupmatcher
 ============
-The program matches groups to projects based on group preferences for various projects.
-Each group ranks N projects, where 
-1 = Most Preferred Project and {N} = Least Preferred Project
-It does not allow two projects to have the same ranking.
+The program matches individuals to groups based on individual preferences for various groups.
+Each group g can have a different number of individuals, where the maximum capacity is max_capacity(g).
 
-The matching occurs in rounds.
-In the first round, it finds every group that has picked a project as its first pick (ranking = 1).
-It then randomly selects one of these groups and assigns that project to them.
-In the next round, it finds every group that has picked a project as their second pick (ranking = 2).
-Again, it randomly selects one of these groups and assigns the project to them.
-This process is repeated until all of the groups have been assigned a project, or until there are no more projects left.
+In the preferences definition, each individual indicates the utility u(i, g) they would get from belonging to that group.
+A higher number indicates the individual would receive more utility or benefit for belonging to that group.
+Negative utilities are allowed.   
+If no preference is specified, the system assumes that the utility is zero.
 
-I have enclosed a sample CSV file.  You can edit the file.
-The file contains the following columns:
-group_id, proj_1_rank, proj_2_rank, proj_4_rank, ... , proj_{N}_rank
+An individual can only belong to one group.
+The matching algorithm takes O(sum_of_max_capacities_across_all_groups^3) time.
 
-To run the progrom, type:
-python groupmatcher.py
+I have enclosed two sample preference files, a CSV file and a JSON file.  You can edit a file.
 
-Look at the last output to see the final project assignments for the various groups.
+The CSV file must contain the following columns:
+individual_id, group_1_max_4, group_2_max_1, group_3_max_2, ... , group_{group id}_max_{max size of group}
+
+The JSON file must contain the following structure:
+
+{
+  "groups": {
+    "group1": {"max":2},
+    "group2": {"max":4},
+    "group3": {"max":1},
+  },
+  "individuals": {
+    "bob": {"prefs":{
+      "group1":4,
+      "group2":2.2,
+      "group3":0
+    }},
+    "sam": {"prefs":{
+      "group1":4,
+      "group2":2.2,
+      "group3":-6
+    }}, 
+    "lisa": {"prefs":{
+      "group1":4,
+      "group2":0,
+      "group3":4
+    }}
+  }
+}
+
+For groups, the syntax is:
+group_id: {"max":max_size_of_group}
+
+For individuals, the syntax is:
+individual_id:{"pref":{group_id:utility_of_group}}
+
+To run the progrom, execute the following from the terminal:
+python groupmatcher.py {preference_inputfile} {assignment_outputfile}
+
