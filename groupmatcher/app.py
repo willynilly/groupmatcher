@@ -8,9 +8,9 @@ class App:
         self.output_filename = output_filename
     
     def run(self):
-        #try:
-        model_manager = PreferenceLoader().load(self.input_filename)
-        model_manager.assignments = MaxMunkresMatcher().match(model_manager)
-        AssignmentWriter().write(model_manager, self.output_filename)
-        #except Exception as e:
-        #    print e
+        try:
+            model_manager = PreferenceLoader().load(self.input_filename)
+            model_manager.assignments = MaxMunkresMatcher().match(model_manager)
+            AssignmentWriter().write(model_manager, self.output_filename)
+        except Exception as e:
+            print e
